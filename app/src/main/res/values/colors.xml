@@ -2,4 +2,20 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Brand colors -->
+    <color name="colorPrimary">#00BCD4</color>          <!-- Aqua -->
+    <color name="colorPrimaryDark">#0097A7</color>      <!-- Darker aqua -->
+    <color name="colorAccent">#4DD0E1</color>           <!-- Lighter aqua -->
+
+    <!-- Background and surface -->
+    <color name="colorBackground">#F8FAFC</color>       <!-- Very light gray -->
+    <color name="colorSurface">#FFFFFF</color>          <!-- White -->
+    <color name="colorTextPrimary">#212121</color>      <!-- Almost black -->
+    <color name="colorTextSecondary">#666666</color>    <!-- Gray -->
+
+    <!-- Divider / outline -->
+    <color name="colorDivider">#E0E0E0</color>
+
+    <!-- Error -->
+    <color name="colorError">#F44336</color>
 </resources>

@@ -36,7 +36,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pizza from Domino’s"
+                android:text="Title of the expense"
                 android:textStyle="bold"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="16sp" />

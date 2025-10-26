@@ -1,5 +1,6 @@
 package com.codeleg.cashflow.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -21,20 +22,15 @@ interface ExpenseDao {
     suspend fun deleteExpense(expense: Expense)
 
     @Query("SELECT * FROM expenses")
-    suspend fun getAllExpenses(): List<Expense>
+     fun getAllExpenses(): LiveData<List<Expense>>
 
     @Query("SELECT * FROM expenses WHERE categoryId = :categoryId")
-    suspend fun getExpenseByCategory(categoryId: Int): List<Expense>
+    suspend fun getExpenseByCategory(categoryId: Int): LiveData<List<Expense>>
 
     @Query("SELECT SUM(amount) FROM expenses")
-    suspend fun getTotalExpense():Float?
+    suspend fun getTotalExpense(): LiveData<Float?>
 
     @Query("SELECT SUM(amount) FROM expenses WHERE categoryId = :categoryId")
-    suspend fun getTotalByCategory(categoryId: Int):Float?
-
-
-
-
-
+    suspend fun getTotalByCategory(categoryId: Int): LiveData<Float?>
 
 }

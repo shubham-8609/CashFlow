@@ -1,5 +1,6 @@
 package com.codeleg.cashflow.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -10,14 +11,14 @@ import com.codeleg.cashflow.model.Category
 interface CategoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategory(category: Category)
-
-    @Query("SELECT * FROM category")
-    suspend fun getAllCategory(): List<Category>
-
-    @Query("SELECT * FROM category WHERE id = :categoryId")
-    suspend fun getCategoryById(categoryId: Int): Category?
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategories(categories: List<Category>)
+
+    @Query("SELECT * FROM category")
+     fun getAllCategory(): LiveData<List<Category>>
+
+    @Query("SELECT * FROM category WHERE id = :categoryId")
+    suspend fun getCategoryById(categoryId: Int): LiveData<Category?>
+
 
 }

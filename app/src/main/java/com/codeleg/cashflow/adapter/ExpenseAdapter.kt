@@ -11,7 +11,7 @@ import com.codeleg.cashflow.model.ExpenseWithCategory
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class ExpenseAdapter(private val expenses: List<ExpenseWithCategory>) :
+class ExpenseAdapter(private val onItemClick: (ExpenseWithCategory) -> Unit) :
     ListAdapter<ExpenseWithCategory, ExpenseAdapter.ExpenseViewHolder>(ExpenseDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
@@ -34,10 +34,12 @@ class ExpenseAdapter(private val expenses: List<ExpenseWithCategory>) :
             binding.tvCategory.text = item.category.name
             val iconResId = getCategoryIcon(item.category.name)
             binding.imgCategory.setImageResource(iconResId)
-
             val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
             val formattedDate = sdf.format(item.expense.date)
             binding.tvDate.text = formattedDate
+            binding.root.setOnClickListener {
+                onItemClick(item)
+            }
         }
         private fun getCategoryIcon(categoryName: String): Int {
             return when (categoryName.lowercase()) {

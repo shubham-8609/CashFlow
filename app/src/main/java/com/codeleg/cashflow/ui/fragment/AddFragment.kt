@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.codeleg.cashflow.databinding.FragmentAddBinding
+import com.codeleg.cashflow.model.Expense
 import com.codeleg.cashflow.viewmodel.MainViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.datepicker.CalendarConstraints
@@ -112,7 +113,8 @@ class AddFragment : Fragment() {
         val category = vm.allCategory.value?.find { it.name == selectedCategory }
 
         if (date != null && category != null) {
-            vm.saveExpense(title, amount, date, category.id, notes.ifEmpty { null })
+            val expense = Expense(title = title, amount = amount, date = date, categoryId = category.id, note = notes.ifEmpty { null })
+            vm.saveExpense(expense)
             Toast.makeText(requireContext(), "Expense saved successfully", Toast.LENGTH_SHORT)
                 .show()
             navigationListener?.navigateToHome()

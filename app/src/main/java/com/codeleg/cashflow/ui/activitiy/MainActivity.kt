@@ -8,9 +8,11 @@ import androidx.fragment.app.commit
 import com.codeleg.cashflow.R
 import com.codeleg.cashflow.databinding.ActivityMainBinding
 import com.codeleg.cashflow.ui.fragment.AddFragment
+import com.codeleg.cashflow.ui.fragment.EditFragment
 import com.codeleg.cashflow.ui.fragment.HomeFragment
 import com.codeleg.cashflow.ui.fragment.NavigationListener
 import com.codeleg.cashflow.viewmodel.MainViewModel
+import kotlin.math.exp
 
 class MainActivity : AppCompatActivity() , NavigationListener {
     private lateinit var binding: ActivityMainBinding
@@ -39,5 +41,12 @@ class MainActivity : AppCompatActivity() , NavigationListener {
 
     override fun navigateToHome() {
         supportFragmentManager.popBackStack()
+    }
+
+    override fun navigateToEditExpense(expenseId: Int) {
+        supportFragmentManager.commit {
+            replace(R.id.main_container, EditFragment.newInstance(expenseId))
+            addToBackStack(null)
+        }
     }
 }

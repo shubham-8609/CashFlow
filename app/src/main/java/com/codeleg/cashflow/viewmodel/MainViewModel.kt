@@ -11,15 +11,15 @@ import com.codeleg.cashflow.model.Expense
 import com.codeleg.cashflow.model.ExpenseWithCategory
 import com.codeleg.cashflow.repositories.CategoryRepository
 import com.codeleg.cashflow.repositories.ExpenseRepository
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.util.Date
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val expenseRepo: ExpenseRepository
     private val categoryRepo: CategoryRepository
-
     val allExpense: LiveData<List<ExpenseWithCategory>>
     val totalExpense: LiveData<Float>
     val allCategory : LiveData<List<Category>>
@@ -37,18 +37,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-    fun saveExpense(title: String, amount: Float, date: Date, categoryId: Int, note: String? = null) {
-        val expense = Expense(
-            title = title,
-            amount = amount,
-            date = date,
-            categoryId = categoryId,
-            note = note
-        )
-
+    fun saveExpense(expense: Expense) {
         viewModelScope.launch(Dispatchers.IO) {
             expenseRepo.insertExpense(expense)
         }
     }
+
+    fun deleteExpense(expense: Expense) {
+        viewModelScope.launch(Dispatchers.IO){
+            expenseRepo.deleteExpense(expense)
+        }
+        }
+
+    fun getExpAndCatById(id: Int): Deferred<ExpenseWithCategory?> {
+        return viewModelScope.async(Dispatchers.IO) {
+            expenseRepo.getExpAndCatById(id)
+        }
+    }
+
+    fun updateExpense(expense: Expense){
+        viewModelScope.launch(Dispatchers.IO){
+            expenseRepo.updateExpense(expense)
+        }
+
+    }
+
 
 }

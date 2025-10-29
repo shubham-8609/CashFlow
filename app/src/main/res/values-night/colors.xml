@@ -12,7 +12,7 @@
 
         <color name="colorBackground">#3C3838</color>
         <color name="colorOnBackground">#FFFFFF</color>
-        <color name="colorSurface">#1E1E1E</color>
+        <color name="colorSurface">#3B3939</color>
         <color name="colorOnSurface">#FFFFFF</color>
         <color name="colorSurfaceVariant">#2C2C2C</color>
         <color name="colorOnSurfaceVariant">#B3B3B3</color>

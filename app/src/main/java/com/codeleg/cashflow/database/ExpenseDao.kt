@@ -24,7 +24,7 @@ interface ExpenseDao {
     suspend fun deleteExpense(expense: Expense)
 
     @Transaction
-    @Query("SELECT * FROM expenses ORDER BY date DESC")
+    @Query("SELECT * FROM expenses ORDER BY date DESC, id DESC")
      fun getAllExpenseWithCategory(): LiveData<List<ExpenseWithCategory>>
 
     @Query("SELECT * FROM expenses WHERE categoryId = :categoryId")
@@ -32,6 +32,10 @@ interface ExpenseDao {
 
     @Query("SELECT SUM(amount) FROM expenses")
      fun getTotalExpense(): LiveData<Float?>
+
+     @Transaction
+     @Query("SELECT * FROM expenses WHERE id = :id")
+      fun getExpAndCatById(id: Int): ExpenseWithCategory
 
     @Query("SELECT SUM(amount) FROM expenses WHERE categoryId = :categoryId")
      fun getTotalByCategory(categoryId: Int): LiveData<Float?>

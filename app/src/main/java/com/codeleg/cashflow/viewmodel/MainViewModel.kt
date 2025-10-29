@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.codeleg.cashflow.CashFlow
 import com.codeleg.cashflow.model.Category
 import com.codeleg.cashflow.model.Expense
+import com.codeleg.cashflow.model.ExpenseWithCategory
 import com.codeleg.cashflow.repositories.CategoryRepository
 import com.codeleg.cashflow.repositories.ExpenseRepository
 import kotlinx.coroutines.Dispatchers
@@ -19,16 +20,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val expenseRepo: ExpenseRepository
     private val categoryRepo: CategoryRepository
 
-    val allexpense: LiveData<List<Expense>>
+    val allExpense: LiveData<List<ExpenseWithCategory>>
     val totalExpense: LiveData<Float>
     val allCategory : LiveData<List<Category>>
 
     init {
         val expenseDao = (application as CashFlow).database.expenseDao()
-        val categoryDao = (application as CashFlow).database.categoryDao()
+        val categoryDao = application.database.categoryDao()
         categoryRepo = CategoryRepository(categoryDao)
         expenseRepo = ExpenseRepository(expenseDao)
-        allexpense = expenseRepo.allExpense
+        allExpense = expenseRepo.allExpense
          totalExpense = expenseRepo.totalExpense.map { it ?: 0f }
         allCategory = categoryRepo.allCategory
 

@@ -6,8 +6,10 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.codeleg.cashflow.model.Expense
+import com.codeleg.cashflow.model.ExpenseWithCategory
 
 
 @Dao
@@ -21,8 +23,9 @@ interface ExpenseDao {
     @Delete
     suspend fun deleteExpense(expense: Expense)
 
+    @Transaction
     @Query("SELECT * FROM expenses ORDER BY date DESC")
-     fun getAllExpenses(): LiveData<List<Expense>>
+     fun getAllExpenseWithCategory(): LiveData<List<ExpenseWithCategory>>
 
     @Query("SELECT * FROM expenses WHERE categoryId = :categoryId")
      fun getExpenseByCategory(categoryId: Int): LiveData<List<Expense>>

@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.codeleg.cashflow.R
 import com.codeleg.cashflow.databinding.ItemExpenseBinding
-import com.codeleg.cashflow.model.Expense
+import com.codeleg.cashflow.model.ExpenseWithCategory
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-class ExpenseAdapter(private val expenses: List<Expense>) :
-    ListAdapter<Expense, ExpenseAdapter.ExpenseViewHolder>(ExpenseDiffCallback()) {
+class ExpenseAdapter(private val expenses: List<ExpenseWithCategory>) :
+    ListAdapter<ExpenseWithCategory, ExpenseAdapter.ExpenseViewHolder>(ExpenseDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
         val binding =
@@ -18,26 +21,46 @@ class ExpenseAdapter(private val expenses: List<Expense>) :
     }
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
-        val expense = getItem(position)
-        holder.bind(expense)
+        val item = getItem(position)
+        holder.bind(item)
     }
 
     inner class ExpenseViewHolder(private val binding: ItemExpenseBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(expense: Expense) {
-            binding.tvTitle.text = expense.title
-            binding.tvAmount.text = expense.amount.toString()
+        fun bind(item: ExpenseWithCategory) {
+            binding.tvTitle.text = item.expense.title
+            binding.tvAmount.text = "₹${item.expense.amount}"
+            binding.tvCategory.text = item.category.name
+            val iconResId = getCategoryIcon(item.category.name)
+            binding.imgCategory.setImageResource(iconResId)
+
+            val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+            val formattedDate = sdf.format(item.expense.date)
+            binding.tvDate.text = formattedDate
         }
+        private fun getCategoryIcon(categoryName: String): Int {
+            return when (categoryName.lowercase()) {
+                "food" -> R.drawable.food
+                "transport" -> R.drawable.transport
+                "shopping" -> R.drawable.shopping
+                "entertainment" -> R.drawable.entertainment
+                "health" -> R.drawable.health
+                "bills" -> R.drawable.bill
+                "other" -> R.drawable.other
+                else -> R.drawable.other
+            }
+        }
+
     }
 }
 
-class ExpenseDiffCallback : DiffUtil.ItemCallback<Expense>() {
-    override fun areItemsTheSame(oldItem: Expense, newItem: Expense): Boolean {
-        return oldItem.id == newItem.id
+class ExpenseDiffCallback : DiffUtil.ItemCallback<ExpenseWithCategory>() {
+    override fun areItemsTheSame(oldItem: ExpenseWithCategory, newItem: ExpenseWithCategory): Boolean {
+        return oldItem.expense.id == newItem.expense.id
     }
 
-    override fun areContentsTheSame(oldItem: Expense, newItem: Expense): Boolean {
+    override fun areContentsTheSame(oldItem: ExpenseWithCategory, newItem: ExpenseWithCategory): Boolean {
         return oldItem == newItem
     }
 }

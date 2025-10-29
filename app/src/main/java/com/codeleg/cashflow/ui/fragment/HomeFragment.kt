@@ -2,18 +2,18 @@ package com.codeleg.cashflow.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.codeleg.cashflow.R
+import androidx.lifecycle.lifecycleScope
 import com.codeleg.cashflow.adapter.ExpenseAdapter
 import com.codeleg.cashflow.databinding.FragmentHomeBinding
-import com.codeleg.cashflow.model.Expense
 import com.codeleg.cashflow.viewmodel.MainViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.launch
+
 class HomeFragment : Fragment() {
     private val mainViewModel: MainViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
@@ -38,10 +38,12 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
         expenseAdapter = ExpenseAdapter(emptyList())
         binding.rvExpenses.adapter = expenseAdapter
-        addBtn = binding.fabAddExpense
-        mainViewModel.allexpense.observe(viewLifecycleOwner) {
-            expenseAdapter.submitList(it?: emptyList())
+        lifecycleScope.launch {
+            mainViewModel.allExpense.observe(viewLifecycleOwner) { expenses ->
+                expenseAdapter.submitList(expenses ?: emptyList())
+            }
         }
+        addBtn = binding.fabAddExpense
         addBtn.setOnClickListener { navigationListener?.navigateToAddExpense() }
         return binding.root
     }

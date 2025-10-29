@@ -5,7 +5,7 @@ import com.codeleg.cashflow.database.ExpenseDao
 import com.codeleg.cashflow.model.Expense
 
 class ExpenseRepository(private val expenseDao: ExpenseDao) {
-    val allExpense = expenseDao.getAllExpenses()
+    val allExpense = expenseDao.getAllExpenseWithCategory()
     val totalExpense = expenseDao.getTotalExpense()
     suspend fun insertExpense(expense: Expense) = expenseDao.insertExpense(expense)
     suspend fun updateExpense(expense: Expense) = expenseDao.updateExpense(expense)

@@ -89,9 +89,10 @@
                 android:id="@+id/rv_expenses"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:clipToPadding="false"
+                android:layout_marginHorizontal="@dimen/_6sdp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:paddingBottom="@dimen/_100sdp"
                 tools:listitem="@layout/item_expense" />

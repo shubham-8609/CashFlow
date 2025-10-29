@@ -17,8 +17,13 @@ interface CategoryDao {
     @Query("SELECT * FROM category")
      fun getAllCategory(): LiveData<List<Category>>
 
+
+
     @Query("SELECT * FROM category WHERE id = :categoryId")
-    suspend fun getCategoryById(categoryId: Int): LiveData<Category?>
+     fun getCategoryById(categoryId: Int): LiveData<Category?>
+
+    @Query("SELECT COUNT(*) FROM category")
+    fun getCategoriesCount():Int
 
 
 }

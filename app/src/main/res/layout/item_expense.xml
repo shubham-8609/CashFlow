@@ -1,94 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/_5sdp"
-    app:cardCornerRadius="@dimen/_10sdp"
-    app:cardElevation="@dimen/_3sdp"
-    app:cardBackgroundColor="@color/colorSurface">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/_10sdp"
-        android:gravity="center_vertical">
+        android:layout_marginVertical="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardBackgroundColor="@color/colorSurface">
 
-        <!-- Category Icon -->
-        <ImageView
-            android:id="@+id/img_category"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:backgroundTint="@color/colorPrimary"
-            android:contentDescription="Category Icon" />
-
-        <!-- Middle Section -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp"
+            android:gravity="center_vertical">
 
-            <!-- Title -->
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Title of the expense"
-                android:textStyle="bold"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="16sp" />
+            <!-- Category Icon -->
+            <ImageView
+                android:id="@+id/img_category"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:backgroundTint="@color/colorPrimary"
+                android:contentDescription="Category Icon" />
 
-            <!-- Category + Date -->
+            <!-- Middle Section -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_3sdp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_4sdp"
-                    android:text="•"
-                    android:textColor="@color/colorTextSecondary" />
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="vertical">
 
+                <!-- Title -->
                 <TextView
-                    android:id="@+id/tv_category"
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Food"
-                    android:textColor="@color/colorTextSecondary"
-                    android:textSize="13sp" />
+                    android:text="Title of the expense"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
 
-                <TextView
+                <!-- Category + Date -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_4sdp"
-                    android:text="•"
-                    android:textColor="@color/colorTextSecondary" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_3sdp">
 
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Oct 25, 2025"
-                    android:textColor="@color/colorTextSecondary"
-                    android:textSize="13sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_4sdp"
+                        android:text="•"
+                        android:textColor="@color/colorSecondary" />
+
+                    <TextView
+                        android:id="@+id/tv_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_4sdp"
+                        android:text="•"
+                         />
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Oct 25, 2025"
+
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
             </LinearLayout>
 
-
+            <!-- Amount -->
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹250"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="16sp" />
         </LinearLayout>
-
-        <!-- Amount -->
-        <TextView
-            android:id="@+id/tv_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="₹250"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:textSize="16sp" />
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

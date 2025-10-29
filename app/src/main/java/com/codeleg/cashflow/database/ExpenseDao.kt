@@ -21,16 +21,16 @@ interface ExpenseDao {
     @Delete
     suspend fun deleteExpense(expense: Expense)
 
-    @Query("SELECT * FROM expenses")
+    @Query("SELECT * FROM expenses ORDER BY date DESC")
      fun getAllExpenses(): LiveData<List<Expense>>
 
     @Query("SELECT * FROM expenses WHERE categoryId = :categoryId")
-    suspend fun getExpenseByCategory(categoryId: Int): LiveData<List<Expense>>
+     fun getExpenseByCategory(categoryId: Int): LiveData<List<Expense>>
 
     @Query("SELECT SUM(amount) FROM expenses")
-    suspend fun getTotalExpense(): LiveData<Float?>
+     fun getTotalExpense(): LiveData<Float?>
 
     @Query("SELECT SUM(amount) FROM expenses WHERE categoryId = :categoryId")
-    suspend fun getTotalByCategory(categoryId: Int): LiveData<Float?>
+     fun getTotalByCategory(categoryId: Int): LiveData<Float?>
 
 }

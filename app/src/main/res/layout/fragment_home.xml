@@ -1,107 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/_5sdp"
-    android:background="@color/colorBackground"
-    tools:context=".ui.fragment.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- 🔹 Scrollable content -->
-    <LinearLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="com.codeleg.cashflow.viewmodel.MainViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/_12sdp"
-        android:paddingTop="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_70sdp"
-        android:fitsSystemWindows="true">
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:background="@color/colorBackground"
+        tools:context=".ui.fragment.HomeFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_total_card_gradient"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:paddingHorizontal="@dimen/_20sdp"
-            android:paddingVertical="@dimen/_18sdp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.8"
-                android:text="This Month's Summary"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
-
-            <!-- 💰 Total Spent -->
-            <TextView
-                android:id="@+id/tv_total_spent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:text="₹5,420"
-                android:textColor="@android:color/white"
-                android:textSize="34sp"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
-
-
-        <!-- 📂 Section Header Row -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/_6sdp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Recent Expenses"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ImageButton
-                android:id="@+id/btn_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Filter"
-                android:padding="@dimen/_6sdp"
-                app:tint="@color/colorTextSecondary" />
-        </LinearLayout>
-
-        <!-- ♻️ RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_expenses"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/_100sdp"
-            tools:listitem="@layout/item_expense" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_70sdp"
+            android:fitsSystemWindows="true">
 
-    <!-- ➕ Floating Action Button (now floats above content) -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_expense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/_20sdp"
-        android:contentDescription="Add Expense"
-        app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@drawable/outline_add_24"
-        app:tint="@android:color/white"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_total_card_gradient"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:paddingVertical="@dimen/_18sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:text="This Months Summary"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_total_spent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:text='@{viewModel.totalExpense.toString()}'
+                    android:textColor="@android:color/white"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_6sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Recent Expenses"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btn_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Filter"
+                    android:padding="@dimen/_6sdp"
+                    app:tint="@color/colorSecondary" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_expenses"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:paddingBottom="@dimen/_100sdp"
+                tools:listitem="@layout/item_expense" />
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/_20sdp"
+            android:contentDescription="Add Expense"
+            app:backgroundTint="@color/colorPrimary"
+            app:srcCompat="@drawable/outline_add_24"
+            app:tint="@android:color/white"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

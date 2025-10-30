@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="10dp">
 
             <ImageView
                 android:layout_width="20dp"
@@ -128,7 +128,16 @@
             android:textSize="28sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="@dimen/_4sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{expense.expense.note}"
+            android:textSize="20sp"
+            android:textAlignment="center"/>
+
+
 
         <!-- Buttons -->
         <LinearLayout

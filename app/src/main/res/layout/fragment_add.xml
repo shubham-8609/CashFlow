@@ -136,8 +136,10 @@
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_notes"
+                                android:gravity="top"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:maxHeight="@dimen/_300sdp"
                                 android:inputType="textMultiLine"
                                 android:minLines="3" />
                         </com.google.android.material.textfield.TextInputLayout>

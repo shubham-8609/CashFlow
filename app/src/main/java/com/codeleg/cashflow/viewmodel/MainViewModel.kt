@@ -32,9 +32,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         allExpense = expenseRepo.allExpense
          totalExpense = expenseRepo.totalExpense.map { it ?: 0f }
         allCategory = categoryRepo.allCategory
-
-
-
     }
 
     fun saveExpense(expense: Expense) {

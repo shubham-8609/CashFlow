@@ -134,6 +134,8 @@
                                 android:id="@+id/et_edit_notes"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="top"
+                                android:maxHeight="@dimen/_300sdp"
                                 android:inputType="textMultiLine"
                                 android:minLines="3" />
                         </com.google.android.material.textfield.TextInputLayout>

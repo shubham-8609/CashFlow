@@ -35,13 +35,13 @@
                     android:orientation="vertical"
                     android:background="@drawable/bg_total_card_gradient"
                     android:paddingHorizontal="@dimen/_20sdp"
-                    android:paddingVertical="@dimen/_20sdp"
+                    android:paddingVertical="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:elevation="@dimen/_3sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:gravity="center">
 
-                 <!--   &lt;!&ndash; Title &ndash;&gt;
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -51,108 +51,113 @@
                         android:textSize="14sp"
                         android:alpha="0.85" />
 
-                    &lt;!&ndash; Total Spent &ndash;&gt;
-                    <TextView
-                        android:id="@+id/tv_total_spent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        android:text='@{String.valueOf(viewModel.totalExpense)}'
-                        android:textColor="@android:color/white"
-                        android:textSize="34sp"
-                        android:textStyle="bold"/>
 
-                    &lt;!&ndash; Budget Progress &ndash;&gt;
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ProgressBar
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="0dp"
-                            android:layout_height="8dp"
-                            android:layout_weight="1"
-                            android:max="100"
-                            android:progress="@{(int)(viewModel.spentPercentage)}"
-                            android:backgroundTint="@android:color/white"
-                            android:clipToOutline="true" />
-
-                        <TextView
+                         <TextView
+                            android:id="@+id/tv_total_spent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_6sdp"
-                            android:text='@{String.format("%.0f%%", viewModel.spentPercentage)}'
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:text="Total"
                             android:textColor="@android:color/white"
-                            android:textSize="13sp" />
-                    </LinearLayout>
+                            android:textSize="34sp"
+                            android:textStyle="bold"/>
 
-                    &lt;!&ndash; Quick Stats Row &ndash;&gt;
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_12sdp"
-                        android:orientation="horizontal"
-                        android:weightSum="3"
-                        android:gravity="center">
 
-                        &lt;!&ndash; Total Transactions &ndash;&gt;
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:gravity="center">
-                            <TextView
-                                android:text='@{String.valueOf(viewModel.transactionCount)}'
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="@android:color/white" />
-                            <TextView
-                                android:text="Transactions"
-                                android:textSize="12sp"
-                                android:textColor="@android:color/white"
-                                android:alpha="0.8" />
-                        </LinearLayout>
+                    <!--       <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/_10sdp"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
 
-                        &lt;!&ndash; Highest Expense &ndash;&gt;
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:gravity="center">
-                            <TextView
-                                android:text='@{String.format("₹%.0f", viewModel.highestExpense)}'
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-                            <TextView
-                                android:text="Highest Expense"
-                                android:textSize="12sp"
-                                android:alpha="0.8" />
-                        </LinearLayout>
+                              <ProgressBar
+                                  style="?android:attr/progressBarStyleHorizontal"
+                                  android:layout_width="0dp"
+                                  android:layout_height="8dp"
+                                  android:layout_weight="1"
+                                  android:max="100"
+                                  android:progress="@{(int)(viewModel.spentPercentage)}"
+                                  android:backgroundTint="@android:color/white"
+                                  android:clipToOutline="true" />
 
-                        &lt;!&ndash; Avg Expense &ndash;&gt;
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:gravity="center">
-                            <TextView
-                                android:text='@{String.format("₹%.0f", viewModel.avgExpense)}'
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="@android:color/white" />
-                            <TextView
-                                android:text="Avg Expense"
-                                android:textSize="12sp"
-                                android:textColor="@android:color/white"
-                                android:alpha="0.8" />
-                        </LinearLayout>
-                    </LinearLayout>-->
+                              <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginStart="@dimen/_6sdp"
+                                  android:text='@{String.format("%.0f%%", viewModel.spentPercentage)}'
+                                  android:textColor="@android:color/white"
+                                  android:textSize="13sp" />
+                          </LinearLayout>
+
+                          &lt;!&ndash; Quick Stats Row &ndash;&gt;
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="@dimen/_12sdp"
+                              android:orientation="horizontal"
+                              android:weightSum="3"
+                              android:gravity="center"> -->
+
+
+                              <LinearLayout
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="1"
+                                  android:orientation="vertical"
+                                  android:gravity="center">
+                                  <TextView
+                                      android:layout_height="wrap_content"
+                                      android:layout_width="wrap_content"
+                                      android:text="Total transactions"
+                                      android:textSize="18sp"
+                                      android:textStyle="bold"
+                                      android:textColor="@android:color/white" />
+                                  <TextView
+                                      android:id="@+id/tv_transaction_count"
+                                      android:layout_height="wrap_content"
+                                      android:layout_width="wrap_content"
+                                      android:text="No of transactions."
+                                      android:textSize="17sp"
+                                      android:textColor="@android:color/white"
+                                      android:alpha="0.8" />
+                              </LinearLayout>
+
+
+                        <!--     <LinearLayout
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="1"
+                                  android:orientation="vertical"
+                                  android:gravity="center">
+                                  <TextView
+                                      android:text='@{String.format("₹%.0f", viewModel.highestExpense)}'
+                                      android:textSize="18sp"
+                                      android:textStyle="bold" />
+                                  <TextView
+                                      android:text="Highest Expense"
+                                      android:textSize="12sp"
+                                      android:alpha="0.8" />
+                              </LinearLayout>
+
+                              &lt;!&ndash; Avg Expense &ndash;&gt;
+                              <LinearLayout
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="1"
+                                  android:orientation="vertical"
+                                  android:gravity="center">
+                                  <TextView
+                                      android:text='@{String.format("₹%.0f", viewModel.avgExpense)}'
+                                      android:textSize="18sp"
+                                      android:textStyle="bold"
+                                      android:textColor="@android:color/white" />
+                                  <TextView
+                                      android:text="Avg Expense"
+                                      android:textSize="12sp"
+                                      android:textColor="@android:color/white"
+                                      android:alpha="0.8" />
+                              </LinearLayout>
+                          </LinearLayout> -->
                 </LinearLayout>
 
                 <!-- Header Row -->

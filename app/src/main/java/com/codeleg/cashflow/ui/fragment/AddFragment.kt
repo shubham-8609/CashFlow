@@ -36,7 +36,6 @@ class AddFragment : Fragment() {
     private lateinit var btnSave: Button
     private lateinit var toolbar: MaterialToolbar
 
-    private var categories: String? = null
     private var navigationListener: NavigationListener? = null
 
 
@@ -67,20 +66,20 @@ class AddFragment : Fragment() {
         }
         etTitle = binding.etTitle
         etAmount = binding.etAmount
-        toolbar = binding.toolbarAddExpense
+        setupToolbar()
         etNotes = binding.etNotes
         btnSave = binding.btnSave
         btnSave.setOnClickListener {
             saveExpense()
         }
+    }
+
+    private fun setupToolbar(){
+        toolbar = binding.toolbarAddExpense
         toolbar.setNavigationOnClickListener {
             navigationListener?.navigateToHome()
         }
-        vm.allCategory.observe(viewLifecycleOwner) { it ->
-            categories = it.map { it.name }.toString()
-        }
     }
-
     private fun setupCategorySpinner() {
         viewLifecycleOwner.lifecycleScope.launch {
             vm.allCategory.observe(viewLifecycleOwner) { categories ->

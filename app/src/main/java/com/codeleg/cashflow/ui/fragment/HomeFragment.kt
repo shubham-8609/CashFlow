@@ -37,29 +37,33 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         expenseAdapter = ExpenseAdapter { item ->
             showExpenseDetails(item)
         }
+        binding.viewModel = mainViewModel
         binding.rvExpenses.adapter = expenseAdapter
         mainViewModel.allExpense.observe(viewLifecycleOwner) { expenses ->
             expenseAdapter.submitList(expenses ?: emptyList())
             binding.noExpenseimg.visibility = if (expenses.isEmpty()) View.VISIBLE else View.GONE
+            binding.tvTransactionCount.text = expenses.size.toString()
+
 
         }
         addBtn = binding.fabAddExpense
         addBtn.setOnClickListener { navigationListener?.navigateToAddExpense() }
+        mainViewModel.totalExpense.observe(viewLifecycleOwner) { totalExpense ->
+            binding.tvTotalSpent.text = "₹${totalExpense ?: 0f}"
+        }
         return binding.root
     }
 
     fun showExpenseDetails(item: ExpenseWithCategory) {
         val dialogBinding = LayoutDetailsBinding.inflate(layoutInflater)
-        val dialog = MaterialAlertDialogBuilder(requireContext())
-            .setView(dialogBinding.root)
-            .create()
+        val dialog =
+            MaterialAlertDialogBuilder(requireContext()).setView(dialogBinding.root).create()
 
         val sdfDate = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
         val sdfTime = SimpleDateFormat("hh:mm a", Locale.getDefault())
@@ -74,12 +78,10 @@ class HomeFragment : Fragment() {
 
         dialogBinding.btnDelete.setOnClickListener {
             mainViewModel.deleteExpense(item.expense)
-            Snackbar.make(binding.root, "Expense Deleted", Snackbar.LENGTH_LONG)
-                .setAction("Undo") {
+            Snackbar.make(binding.root, "Expense Deleted", Snackbar.LENGTH_LONG).setAction("Undo") {
                     mainViewModel.saveExpense(item.expense)
                     Snackbar.make(binding.root, "Expense Restored", Snackbar.LENGTH_SHORT).show()
-                }
-                .show()
+                }.show()
             dialog.dismiss()
         }
 

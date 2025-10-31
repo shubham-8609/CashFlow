@@ -60,6 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="16dp"
+                    app:tint="@color/colorPrimary"
                     android:scaleType="centerInside"
                     android:src="@drawable/other"
                     android:background="@color/colorSurface"
@@ -100,6 +101,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                app:tint="@color/colorPrimary"
                 android:src="@drawable/outline_calendar_add_on_24"
                 android:layout_marginEnd="6dp" />
 
@@ -120,21 +122,38 @@
         </LinearLayout>
 
         <!-- Amount -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp" >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount : "
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
         <TextView
             android:id="@+id/tvAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{String.valueOf(expense.expense.amount)}"
-            android:textSize="28sp"
+            android:textSize="25sp"
             android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             android:gravity="center"
-            android:layout_marginBottom="@dimen/_4sdp" />
+             />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{expense.expense.note}"
             android:textSize="20sp"
+            android:maxLines="5"
+            android:ellipsize="end"
+            android:scrollHorizontally="true"
             android:textAlignment="center"/>
 
 

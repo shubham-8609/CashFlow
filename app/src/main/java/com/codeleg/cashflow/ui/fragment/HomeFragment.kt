@@ -43,20 +43,24 @@ class HomeFragment : Fragment() {
         expenseAdapter = ExpenseAdapter { item ->
             showExpenseDetails(item)
         }
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = mainViewModel
         binding.rvExpenses.adapter = expenseAdapter
         mainViewModel.allExpense.observe(viewLifecycleOwner) { expenses ->
             expenseAdapter.submitList(expenses ?: emptyList())
             binding.noExpenseimg.visibility = if (expenses.isEmpty()) View.VISIBLE else View.GONE
             binding.tvTransactionCount.text = expenses.size.toString()
-
-
         }
+        mainViewModel.spentPercentage.observe(viewLifecycleOwner) { percent ->
+            binding.progressSpent.progress =  percent.toInt()
+        }
+
         addBtn = binding.fabAddExpense
         addBtn.setOnClickListener { navigationListener?.navigateToAddExpense() }
         mainViewModel.totalExpense.observe(viewLifecycleOwner) { totalExpense ->
             binding.tvTotalSpent.text = "₹${totalExpense ?: 0f}"
         }
+
         return binding.root
     }
 

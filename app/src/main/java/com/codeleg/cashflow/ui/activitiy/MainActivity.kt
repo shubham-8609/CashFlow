@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() , NavigationListener {
 
     private fun manageBudget(){
         lifecycleScope.launch {
-             isBudgetSet = withContext(Dispatchers.IO){ pf.isBudgetSet() }
+             isBudgetSet = pf.isBudgetSet()
         if(!isBudgetSet) askToSetBudget() else checkIsReached()
         }
     }

@@ -67,6 +67,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // ✅ WorkManager - Background work scheduling and execution (KTX)
+    implementation("androidx.work:work-runtime-ktx:2.11.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

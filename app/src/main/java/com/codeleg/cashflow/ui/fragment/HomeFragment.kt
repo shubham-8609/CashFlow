@@ -49,6 +49,7 @@ class HomeFragment : Fragment() {
         mainViewModel.allExpense.observe(viewLifecycleOwner) { expenses ->
             expenseAdapter.submitList(expenses ?: emptyList())
             binding.noExpenseimg.visibility = if (expenses.isEmpty()) View.VISIBLE else View.GONE
+            binding.rvExpenses.visibility = if(expenses.isNotEmpty()) View.VISIBLE else View.GONE
             binding.tvTransactionCount.text = expenses.size.toString()
         }
         mainViewModel.spentPercentage.observe(viewLifecycleOwner) { percent ->

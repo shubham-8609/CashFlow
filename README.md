@@ -12,33 +12,44 @@ A simple, clean expense tracker and budget manager for Android. Track spending, 
 ## Screenshots
 Below are screenshots to give you a feel for the UI and main flows of the app.
 
-### Home
-![Home screen](screenshots/HomePageImg.png)
-_The Home screen shows your budget status and a list of recent expenses._
-
-### Add Expense
-![Add expense form](screenshots/AddExpenseImg.png)
-_Add a new expense with amount, title, category, and date._
-
-### Expense Saved
-![Expense saved confirmation](screenshots/ExpenseSavedImg.png)
-_A confirmation message appears when a new expense is saved successfully._
-
-### Edit Expense
-![Edit expense form](screenshots/EditExpenseImg.png)
-_Update any field of an existing expense and save your changes._
-
-### Expense Details
-![Expense details](screenshots/ExpenseDetailsImg.png)
-_View full details of a selected expense, including date and category._
-
-### Set Budget
-![Set budget dialog](screenshots/SetBudgetDialogImg.png)
-_Set or update your monthly budget directly from the app._
-
-### Warnings
-![Budget warning](screenshots/WarningImg.png)
-_Clear warning UI appears when you approach or exceed your set budget._
+<table>
+  <tr>
+    <td align="center">
+      <img src="screenshots/HomePageImg.png" alt="Home screen" width="240" />
+      <div style="font-size:12px"><em>Home screen — budget status & recent expenses</em></div>
+    </td>
+    <td align="center">
+      <img src="screenshots/AddExpenseImg.png" alt="Add expense form" width="240" />
+      <div style="font-size:12px"><em>Add expense form — amount, title, category</em></div>
+    </td>
+    <td align="center">
+      <img src="screenshots/ExpenseSavedImg.png" alt="Expense saved confirmation" width="240" />
+      <div style="font-size:12px"><em>Expense saved confirmation</em></div>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/EditExpenseImg.png" alt="Edit expense form" width="240" />
+      <div style="font-size:12px"><em>Edit expense form</em></div>
+    </td>
+    <td align="center">
+      <img src="screenshots/ExpenseDetailsImg.png" alt="Expense details" width="240" />
+      <div style="font-size:12px"><em>Expense details</em></div>
+    </td>
+    <td align="center">
+      <img src="screenshots/SetBudgetDialogImg.png" alt="Set budget dialog" width="240" />
+      <div style="font-size:12px"><em>Set budget dialog</em></div>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/WarningImg.png" alt="Budget warning" width="240" />
+      <div style="font-size:12px"><em>Budget warning</em></div>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
 
 ## Features
 - Budget tracking: define a spending limit and see your remaining budget.
@@ -68,4 +79,3 @@ The APK will be generated under `app/build/outputs/apk/debug/`.
 ## Notes
 - Screens may vary slightly depending on your device and theme.
 - If you don’t see images in this README, ensure you’re viewing it in a context that supports relative image paths (e.g., GitHub, Android Studio’s preview).
-

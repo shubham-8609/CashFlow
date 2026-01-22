@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
         }
 
         addBtn = binding.fabAddExpense
-        addBtn.setOnClickListener { navigationListener?.navigateToAddExpense() }
+        addBtn.setOnClickListener { AddFragment().show(parentFragmentManager , "AddExpense") }
         mainViewModel.totalExpense.observe(viewLifecycleOwner) { totalExpense ->
             binding.tvTotalSpent.text = "₹${totalExpense ?: 0f}"
         }

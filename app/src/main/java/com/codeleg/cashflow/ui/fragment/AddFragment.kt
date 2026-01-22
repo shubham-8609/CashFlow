@@ -16,6 +16,7 @@ import com.codeleg.cashflow.databinding.FragmentAddBinding
 import com.codeleg.cashflow.model.Expense
 import com.codeleg.cashflow.viewmodel.MainViewModel
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -25,7 +26,7 @@ import java.util.Date
 import java.util.Locale
 import kotlin.getValue
 
-class AddFragment : Fragment() {
+class AddFragment : BottomSheetDialogFragment() {
 
     private val vm: MainViewModel by activityViewModels()
     private var _binding: FragmentAddBinding? = null
@@ -34,21 +35,10 @@ class AddFragment : Fragment() {
     private lateinit var etAmount: EditText
     private lateinit var etNotes: EditText
     private lateinit var btnSave: Button
-    private lateinit var toolbar: MaterialToolbar
+    private var selectedCategory: String? = null
 
-    private var navigationListener: NavigationListener? = null
+    
 
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        navigationListener = context as NavigationListener
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +56,6 @@ class AddFragment : Fragment() {
         }
         etTitle = binding.etTitle
         etAmount = binding.etAmount
-        setupToolbar()
         etNotes = binding.etNotes
         btnSave = binding.btnSave
         btnSave.setOnClickListener {
@@ -74,12 +63,6 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun setupToolbar(){
-        toolbar = binding.toolbarAddExpense
-        toolbar.setNavigationOnClickListener {
-            navigationListener?.navigateToHome()
-        }
-    }
     private fun setupCategorySpinner() {
         viewLifecycleOwner.lifecycleScope.launch {
             vm.allCategory.observe(viewLifecycleOwner) { categories ->
@@ -88,22 +71,26 @@ class AddFragment : Fragment() {
                     requireContext(),
                     android.R.layout.simple_spinner_item,
                     categoryNames
-                ).also {
-                    it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                }
-
-                binding.spinnerCategory.adapter = adapter
+                )
+                binding.spinnerCategory.setAdapter(adapter)
             }
         }
+        binding.spinnerCategory.setOnItemClickListener { parent, _, position, _ ->
+            selectedCategory = parent.getItemAtPosition(position).toString()
+        }
+
     }
 
     private fun saveExpense() {
         val title = etTitle.text.toString()
         val amount = etAmount.text.toString().toFloatOrNull()
         val notes = etNotes.text.toString()
-        val selectedCategory = binding.spinnerCategory.selectedItem.toString()
         val selectedDate = binding.btnSelectDate.text.toString()
-        if (title.isEmpty() || amount == null || selectedCategory.isEmpty() || selectedDate.isEmpty()) {
+        if(selectedCategory==null){
+            binding.spinnerCategory.error = "Please select a category"
+            return
+        }
+        if (title.isEmpty() || amount == null || selectedCategory!!.isEmpty() || selectedDate.isEmpty()) {
             Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             return
         }
@@ -116,7 +103,7 @@ class AddFragment : Fragment() {
             vm.saveExpense(expense)
             Toast.makeText(requireContext(), "Expense saved successfully", Toast.LENGTH_SHORT)
                 .show()
-            navigationListener?.navigateToHome()
+            dismiss()
         } else {
             Toast.makeText(requireContext(), "Error saving expense", Toast.LENGTH_SHORT).show()
         }
@@ -156,9 +143,5 @@ class AddFragment : Fragment() {
         _binding = null
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        navigationListener = null
-    }
 
 }

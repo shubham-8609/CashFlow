@@ -13,7 +13,7 @@ class CashFlow: Application() {
     override fun onCreate() {
         super.onCreate()
         PrefManager.init(this)
-
+        DynamicColors.applyToActivitiesIfAvailable(this)
         BudgetCheckWorker.schedule(this)
     }
 }

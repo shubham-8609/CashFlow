@@ -9,10 +9,10 @@
         android:layout_marginHorizontal="@dimen/_4sdp"
         app:cardCornerRadius="@dimen/_16sdp"
         app:cardElevation="@dimen/_4sdp"
-        app:strokeColor="@color/colorOutline"
+        app:strokeColor="?attr/colorOutline"
         app:strokeWidth="1dp"
-        app:cardBackgroundColor="@color/colorSurface"
-        app:rippleColor="@color/colorPrimaryContainer">
+        app:cardBackgroundColor="?attr/colorSurface"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:gravity="center_vertical"
             android:baselineAligned="false">
 
-            <!-- Category Icon -->
+            <!-- CATEGORY ICON -->
             <FrameLayout
                 android:layout_width="@dimen/_48sdp"
                 android:layout_height="@dimen/_48sdp"
@@ -36,10 +36,10 @@
                     android:layout_height="match_parent"
                     android:padding="@dimen/_10sdp"
                     android:contentDescription="Category Icon"
-                    app:tint="@android:color/white" />
+                    app:tint="?attr/colorOnPrimaryContainer" />
             </FrameLayout>
 
-            <!-- Expense Details -->
+            <!-- EXPENSE DETAILS -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -47,76 +47,76 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:orientation="vertical">
 
-                <!-- Title and Notes Row -->
+                <!-- TITLE + AMOUNT -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Dinner at Cafe"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"
                         android:ellipsize="end"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textColor="?attr/colorPrimary" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="₹450"
-                        android:textColor="@color/colorError"
-                        android:textStyle="bold"
-                        android:textSize="16sp" />
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textColor="?attr/colorError" />
                 </LinearLayout>
 
-                <!-- Category + Date Row -->
+                <!-- CATEGORY + DATE -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_category"
                         android:layout_width="wrap_content"
-                        android:layout_height="29dp"
+                        android:layout_height="wrap_content"
                         android:text="Food"
-                        android:textSize="13sp" />
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_6sdp"
                         android:text="•"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="?attr/colorPrimary" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="25 Oct 2025, 8:30 PM"
-                        android:textSize="13sp" />
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 
-                <!-- Optional Notes -->
-                <TextView
+                <!-- NOTES (OPTIONAL) -->
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_notes"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"
-                    android:text="Weekend dinner with friends "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="12sp"
+                    android:text="Weekend dinner with friends"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="?attr/colorPrimary"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:visibility="gone" />
+
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

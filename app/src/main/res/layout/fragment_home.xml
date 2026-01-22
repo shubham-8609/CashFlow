@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.codeleg.cashflow.viewmodel.MainViewModel" />
@@ -13,162 +12,104 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground"
+        android:background="?attr/colorSurface"
         tools:context=".ui.fragment.HomeFragment">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:padding="@dimen/_10sdp">
+            android:padding="16dp"
+            android:clipToPadding="false">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
                 android:orientation="vertical">
 
-                <!-- Summary Card -->
+                <!-- SUMMARY CARD -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:clipToOutline="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    app:cardCornerRadius="@dimen/_14sdp"
-                    app:cardElevation="@dimen/_4sdp"
-                    app:strokeColor="@android:color/transparent">
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="?attr/colorPrimaryContainer">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_total_card_gradient"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingVertical="@dimen/_16sdp">
+                        android:padding="20dp"
+                        android:orientation="vertical">
 
-                        <!-- Title -->
-                        <TextView
-                            android:id="@+id/tv_summary_title"
+                        <!-- TITLE -->
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:alpha="0.9"
                             android:text="This Month’s Summary"
                             android:textAllCaps="true"
-                            android:textColor="@android:color/white"
-                            android:textSize="15sp" />
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:alpha="0.9"
+                            android:layout_gravity="center_horizontal" />
 
-                        <!-- Total Spent -->
+                        <!-- TOTAL SPENT -->
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_horizontal">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_8sdp"
                                 android:text="Total Spent: "
-                                android:textColor="@android:color/white"
-                                android:textSize="28sp" />
+                                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                                android:textColor="?attr/colorOnPrimaryContainer" />
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tv_total_spent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_8sdp"
                                 android:text="₹ 12,540"
-                                android:textColor="@android:color/white"
-                                android:textSize="28sp" />
+                                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                                android:textStyle="bold"
+                                android:textColor="?attr/colorOnPrimaryContainer" />
                         </LinearLayout>
 
-
+                        <!-- PROGRESS -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:layout_marginTop="16dp"
+                            android:gravity="center_vertical">
 
-                            <ProgressBar
+                            <com.google.android.material.progressindicator.LinearProgressIndicator
                                 android:id="@+id/progress_spent"
-                                style="?android:attr/progressBarStyleHorizontal"
                                 android:layout_width="0dp"
                                 android:layout_height="8dp"
                                 android:layout_weight="1"
-                                android:max="100"
-                                android:progress="0"
-                                android:progressBackgroundTint="@color/colorOnPrimary" />
+                                app:trackColor="?attr/colorSurfaceVariant"
+                                app:indicatorColor="?attr/colorOnPrimaryContainer" />
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_marginStart="12dp"
                                 android:text='@{String.format("%.0f%%", viewModel.spentPercentage)}'
-                                android:textColor="@android:color/white"
-                                android:textSize="14sp" />
+                                android:textAppearance="?attr/textAppearanceLabelMedium"
+                                android:textColor="?attr/colorOnPrimaryContainer" />
                         </LinearLayout>
 
-                        <!-- Transaction Info -->
+                        <!-- STATS -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_18sdp"
-                            android:gravity="center"
+                            android:layout_marginTop="20dp"
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:alpha="0.9"
-                                    android:text="Transactions"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:id="@+id/tv_transaction_count"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_4sdp"
-                                    android:text="24"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="22sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@android:color/white"
-                                    android:alpha="0.9"
-                                    android:text="Highest Exp"
-                                    android:textSize="16sp" />
-                                <TextView
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:textColor="@android:color/white"
-                                    android:text='@{String.format("₹%.0f", viewModel.highestExpense)}'
-                                    android:textSize="24sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
+                            <!-- TRANSACTIONS -->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -176,77 +117,115 @@
                                 android:orientation="vertical"
                                 android:gravity="center">
 
-                                <TextView
-                                    android:layout_height="wrap_content"
+                                <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
-                                    android:text="Avg Expense"
-                                    android:textSize="12sp"
-                                    android:textColor="@android:color/white"
-                                    android:alpha="0.8" />
-                                <TextView
+                                    android:layout_height="wrap_content"
+                                    android:text="Transactions"
+                                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                                    android:textColor="?attr/colorOnPrimaryContainer"
+                                    android:alpha="0.9" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tv_transaction_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="24"
+                                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                                    android:textColor="?attr/colorOnPrimaryContainer" />
+                            </LinearLayout>
+
+                            <!-- HIGHEST -->
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:text='@{String.format("₹%.0f", viewModel.avgExpense)}'
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="@android:color/white" />
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Highest Exp"
+                                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                                    android:textColor="?attr/colorOnPrimaryContainer"
+                                    android:alpha="0.9" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text='@{String.format("₹%.0f", viewModel.highestExpense)}'
+                                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                                    android:textStyle="bold"
+                                    android:textColor="?attr/colorOnPrimaryContainer" />
+                            </LinearLayout>
+
+                            <!-- AVERAGE -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Avg Expense"
+                                    android:textAppearance="?attr/textAppearanceBodySmall"
+                                    android:textColor="?attr/colorOnPrimaryContainer"
+                                    android:alpha="0.8" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text='@{String.format("₹%.0f", viewModel.avgExpense)}'
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textStyle="bold"
+                                    android:textColor="?attr/colorOnPrimaryContainer" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Recent Expenses Section -->
-                <LinearLayout
+                <!-- RECENT EXPENSES TITLE -->
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:text="Recent Expenses"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="?attr/colorOnSurface"
+                    android:layout_marginBottom="8dp" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Recent Expenses"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- RecyclerView -->
+                <!-- RECYCLER -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_expenses"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_390sdp"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:clipToPadding="false"
-                    android:nestedScrollingEnabled="true"
+                    android:layout_height="400dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_expense" />
 
-                <!-- No Expense Image -->
+                <!-- EMPTY STATE -->
                 <ImageView
                     android:id="@+id/noExpenseimg"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_400sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="300dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/img_no_expense"
                     android:visibility="gone" />
-            </LinearLayout>
-        </ScrollView>
 
-        <!-- Floating Action Button -->
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- FAB -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_expense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/_20sdp"
-            android:contentDescription="Add Expense"
-            app:backgroundTint="@color/colorPrimary"
-            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            android:layout_margin="20dp"
             app:srcCompat="@drawable/outline_add_24"
-            app:tint="@android:color/white" />
+            app:tint="?attr/colorOnPrimary"
+            app:backgroundTint="?attr/colorPrimary" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

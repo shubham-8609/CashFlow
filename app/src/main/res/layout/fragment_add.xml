@@ -4,16 +4,14 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackground">
+        android:layout_height="match_parent">
 
-        <!-- AppBar -->
+        <!-- APP BAR -->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_25sdp"
-            android:background="@android:color/transparent"
-            android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar">
+            android:background="@android:color/transparent">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar_add_expense"
@@ -21,12 +19,13 @@
                 android:layout_height="?attr/actionBarSize"
                 app:title="Add Expense"
                 app:titleCentered="true"
-                app:titleTextColor="@color/colorPrimary"
                 app:navigationIcon="@drawable/baseline_arrow_back_24"
                 app:titleTextAppearance="@style/ToolbarTitleText"
-                app:navigationIconTint="@color/colorPrimary" />
+                app:titleTextColor="?attr/colorPrimary"
+                app:navigationIconTint="?attr/colorPrimary" />
         </com.google.android.material.appbar.AppBarLayout>
 
+        <!-- CONTENT -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -42,14 +41,14 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:paddingBottom="@dimen/_20sdp">
 
-                <!-- Expense Form Card -->
+                <!-- FORM CARD -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:elevation="3dp"
                     app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardBackgroundColor="@color/colorSurface">
+                    app:cardBackgroundColor="?attr/colorSurface"
+                    app:cardElevation="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -57,13 +56,12 @@
                         android:orientation="vertical"
                         android:padding="@dimen/_12sdp">
 
-                        <!-- Title -->
+                        <!-- TITLE -->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Title"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                           >
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_title"
@@ -72,14 +70,13 @@
                                 android:inputType="textCapWords" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <!-- Amount -->
+                        <!-- AMOUNT -->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:hint="Amount"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                           >
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_amount"
@@ -88,35 +85,34 @@
                                 android:inputType="numberDecimal" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <!-- Date Picker -->
-
-                        <!-- Category -->
-                        <TextView
+                        <!-- DATE -->
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:text="Date"
                             android:textStyle="bold"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="?attr/colorPrimary" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_select_date"
-                            style="@style/Widget.Material3.Button.TonalButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:drawableEnd="@drawable/outline_calendar_add_on_24"
-                            android:iconTint="@color/colorPrimary"
+                            android:layout_marginTop="@dimen/_6sdp"
                             android:text="Select Date"
-                            app:iconGravity="textStart" />
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            app:icon="@drawable/outline_calendar_add_on_24"
+                            app:iconGravity="textStart"
+                            app:iconTint="?attr/colorPrimary" />
 
-                        <TextView
+                        <!-- CATEGORY -->
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:text="Category"
                             android:textStyle="bold"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="?attr/colorPrimary" />
 
                         <Spinner
                             android:id="@+id/spinner_category"
@@ -125,39 +121,37 @@
                             android:layout_marginTop="@dimen/_4sdp"
                             android:spinnerMode="dropdown" />
 
-                        <!-- Notes -->
+                        <!-- NOTES -->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:hint="Notes (Optional)"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                           >
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_notes"
-                                android:gravity="top"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="top"
+                                android:minLines="3"
                                 android:maxHeight="@dimen/_300sdp"
-                                android:inputType="textMultiLine"
-                                android:minLines="3" />
+                                android:inputType="textMultiLine" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Save Button -->
+                <!-- SAVE BUTTON -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:text="Save Expense"
-                    android:drawableEnd="@drawable/outline_save_24"
-                    android:iconTint="@android:color/white"
-                    app:cornerRadius="@dimen/_10sdp"
-                     />
+                    app:icon="@drawable/outline_save_24"
+                    app:iconTint="?attr/colorOnPrimary"
+                    app:cornerRadius="@dimen/_10sdp" />
             </LinearLayout>
         </ScrollView>
 

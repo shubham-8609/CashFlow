@@ -19,6 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() , NavigationListener {
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() , NavigationListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        enableEdgeToEdge()
         mainContainer = binding.mainContainer
 
         if (savedInstanceState == null) {

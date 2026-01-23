@@ -1,5 +1,8 @@
 package com.codeleg.cashflow.ui.activitiy
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -19,6 +22,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +31,19 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels()
     private val pf = PrefManager
     private var isBudgetSet:Boolean = false
+    private val notificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Notifications disabled. You may miss budget alerts.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
 
     private lateinit var mainContainer: FrameLayout
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 replace(binding.mainContainer.id, HomeFragment())
             }
         }
+        askNotificationPermissionIfNeeded()
         manageBudget()
 
     }
@@ -102,5 +121,23 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
 
     }
+    private fun askNotificationPermissionIfNeeded() {
+        // Only required for Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+            val permission = Manifest.permission.POST_NOTIFICATIONS
+
+            val isGranted = ContextCompat.checkSelfPermission(
+                this,
+                permission
+            ) == PackageManager.PERMISSION_GRANTED
+
+            if (!isGranted) {
+                notificationPermissionLauncher.launch(permission)
+            }
+        }
+    }
+
+
 
 }

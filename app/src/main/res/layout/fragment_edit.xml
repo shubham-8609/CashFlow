@@ -7,63 +7,47 @@
         android:layout_height="match_parent"
         android:background="?attr/colorSurface">
 
-        <!-- APP BAR -->
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:background="@android:color/transparent"
-            android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar_edit_expense"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:title="Edit Expense"
-                app:titleCentered="true"
-                app:titleTextAppearance="@style/ToolbarTitleText"
-                app:titleTextColor="?attr/colorPrimary"
-                app:navigationIcon="@drawable/baseline_arrow_back_24"
-                app:navigationIconTint="?attr/colorPrimary" />
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <!-- CONTENT -->
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
             android:fillViewport="true"
-            android:padding="@dimen/_12sdp">
+            android:padding="@dimen/_16sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:paddingBottom="@dimen/_20sdp">
+                android:orientation="vertical">
+
+                <!-- SCREEN TITLE -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Expense"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                    android:textColor="?attr/colorOnSurface" />
 
                 <!-- FORM CARD -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:cardElevation="3dp"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardBackgroundColor="?attr/colorSurface">
+                    app:cardCornerRadius="@dimen/_16sdp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainer">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="@dimen/_12sdp">
+                        android:padding="@dimen/_16sdp">
 
                         <!-- TITLE -->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Title"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_edit_title"
@@ -76,9 +60,9 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:hint="Amount"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_edit_amount"
@@ -87,51 +71,45 @@
                                 android:inputType="numberDecimal" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <!-- DATE LABEL -->
+                        <!-- DATE -->
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
                             android:text="Date"
-                            android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorPrimary" />
+                            android:textAppearance="?attr/textAppearanceLabelLarge" />
 
-                        <!-- DATE BUTTON -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_edit_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:text="Change Date"
-                            style="@style/Widget.Material3.Button.TonalButton"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
                             app:icon="@drawable/outline_calendar_add_on_24"
-                            app:iconTint="?attr/colorPrimary"
                             app:iconGravity="textStart" />
 
-                        <!-- CATEGORY LABEL -->
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:text="Category"
-                            android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorPrimary" />
-
-                        <!-- CATEGORY SPINNER -->
-                        <Spinner
-                            android:id="@+id/spinner_edit_category"
+                        <!-- CATEGORY -->
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:spinnerMode="dropdown" />
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:hint="Category"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/spinner_edit_category"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <!-- NOTES -->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
                             android:hint="Notes (Optional)"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_edit_notes"
@@ -139,8 +117,7 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="textMultiLine"
                                 android:minLines="3"
-                                android:gravity="top"
-                                android:maxHeight="@dimen/_300sdp" />
+                                android:gravity="top" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -151,11 +128,11 @@
                     android:id="@+id/btn_update_expense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_24sdp"
                     android:text="Update Expense"
+                    style="@style/Widget.Material3.Button"
                     app:icon="@drawable/outline_save_24"
-                    app:iconTint="?attr/colorOnPrimary"
-                    app:cornerRadius="@dimen/_10sdp" />
+                    app:cornerRadius="@dimen/_16sdp" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

@@ -27,14 +27,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var expenseAdapter: ExpenseAdapter
     private lateinit var addBtn: FloatingActionButton
-    private var navigationListener: NavigationListener? = null
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is NavigationListener) navigationListener = context
-        else throw RuntimeException("$context must implement NavigationListener")
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -77,8 +70,8 @@ class HomeFragment : Fragment() {
         dialogBinding.tvTime.text = sdfTime.format(item.expense.date)
 
         dialogBinding.btnEdit.setOnClickListener {
-            navigationListener?.navigateToEditExpense(item.expense.id)
             dialog.dismiss()
+            EditFragment.newInstance(item.expense.id).show(parentFragmentManager, "EditExpense")
         }
 
         dialogBinding.btnDelete.setOnClickListener {
@@ -99,9 +92,6 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        navigationListener = null
-    }
+
 
 }

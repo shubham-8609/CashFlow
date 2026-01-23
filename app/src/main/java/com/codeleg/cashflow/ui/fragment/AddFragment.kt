@@ -69,7 +69,7 @@ class AddFragment : BottomSheetDialogFragment() {
                 val categoryNames = categories.map { it.name }
                 val adapter = ArrayAdapter(
                     requireContext(),
-                    android.R.layout.simple_spinner_item,
+                    android.R.layout.simple_list_item_1,
                     categoryNames
                 )
                 binding.spinnerCategory.setAdapter(adapter)
@@ -90,7 +90,7 @@ class AddFragment : BottomSheetDialogFragment() {
             binding.spinnerCategory.error = "Please select a category"
             return
         }
-        if (title.isEmpty() || amount == null || selectedCategory!!.isEmpty() || selectedDate.isEmpty()) {
+        if (title.isEmpty() || amount == null || selectedDate.isEmpty()) {
             Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             return
         }

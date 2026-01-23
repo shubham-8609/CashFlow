@@ -36,7 +36,7 @@
                     android:layout_height="match_parent"
                     android:padding="@dimen/_10sdp"
                     android:contentDescription="Category Icon"
-                    app:tint="?attr/colorOnPrimaryContainer" />
+                    app:tint="?attr/colorOnPrimary" />
             </FrameLayout>
 
             <!-- EXPENSE DETAILS -->

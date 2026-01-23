@@ -209,7 +209,7 @@
                     android:id="@+id/noExpenseimg"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/img_no_expense"
                     android:visibility="gone" />
 

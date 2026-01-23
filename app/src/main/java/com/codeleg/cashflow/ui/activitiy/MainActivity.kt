@@ -13,7 +13,6 @@ import com.codeleg.cashflow.databinding.LayoutSetBudgetBinding
 import com.codeleg.cashflow.ui.fragment.AddFragment
 import com.codeleg.cashflow.ui.fragment.EditFragment
 import com.codeleg.cashflow.ui.fragment.HomeFragment
-import com.codeleg.cashflow.ui.fragment.NavigationListener
 import com.codeleg.cashflow.viewmodel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +21,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import kotlinx.coroutines.withContext
 
-class MainActivity : AppCompatActivity() , NavigationListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
     private val pf = PrefManager
@@ -49,24 +48,6 @@ class MainActivity : AppCompatActivity() , NavigationListener {
         lifecycleScope.launch {
              isBudgetSet = pf.isBudgetSet()
         if(!isBudgetSet) askToSetBudget() else checkIsReached()
-        }
-    }
-
-    override fun navigateToAddExpense() {
-        supportFragmentManager.commit {
-            replace(binding.mainContainer.id, AddFragment())
-            addToBackStack(null)
-        }
-    }
-
-    override fun navigateToHome() {
-        supportFragmentManager.popBackStack()
-    }
-
-    override fun navigateToEditExpense(expenseId: Int) {
-        supportFragmentManager.commit {
-            replace(binding.mainContainer.id, EditFragment.newInstance(expenseId))
-            addToBackStack(null)
         }
     }
 

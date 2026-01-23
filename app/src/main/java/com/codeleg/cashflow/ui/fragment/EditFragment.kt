@@ -2,6 +2,7 @@ package com.codeleg.cashflow.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.codeleg.cashflow.databinding.FragmentEditBinding
 import com.codeleg.cashflow.model.Expense
 import com.codeleg.cashflow.model.ExpenseWithCategory
 import com.codeleg.cashflow.viewmodel.MainViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -22,20 +24,17 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class EditFragment : Fragment() {
+class EditFragment() : BottomSheetDialogFragment() {
 
     private val vm: MainViewModel by activityViewModels()
     private var _binding: FragmentEditBinding? = null
     private val binding get() = _binding!!
 
-    private var navigationListener: NavigationListener? = null
     private var currentExpenseId: Int = -1
     private var currentExpense: ExpenseWithCategory? = null
+    private var selectedCategory: String? = null
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        navigationListener = context as? NavigationListener
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,41 +51,40 @@ class EditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupToolbar()
         setupCategorySpinner()
         setupButtons()
         loadExpenseData()
     }
 
-    private fun setupToolbar() {
-        binding.toolbarEditExpense.setNavigationOnClickListener {
-            navigationListener?.navigateToHome()
-        }
-    }
+
 
     private fun setupCategorySpinner() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            vm.allCategory.observe(viewLifecycleOwner) { categories ->
-                val categoryNames = categories.map { it.name }
-                val adapter = ArrayAdapter(
-                    requireContext(),
-                    android.R.layout.simple_spinner_item,
-                    categoryNames
-                ).also {
-                    it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                }
-                binding.spinnerEditCategory.adapter = adapter
 
-                // Once spinner is populated, set the current expense category
-                currentExpense?.let { exp ->
-                    val selectedIndex = categoryNames.indexOf(exp.category.name)
-                    if (selectedIndex >= 0) {
-                        binding.spinnerEditCategory.setSelection(selectedIndex)
-                    }
-                }
+        vm.allCategory.observe(viewLifecycleOwner) { categories ->
+
+            val categoryNames = categories.map { it.name }
+
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                categoryNames
+            )
+
+            binding.spinnerEditCategory.setAdapter(adapter)
+
+            // Preselect category when editing
+            currentExpense?.let { exp ->
+                selectedCategory = exp.category.name
+                binding.spinnerEditCategory.setText(exp.category.name, false)
+            }
+
+            // Listen for user selection
+            binding.spinnerEditCategory.setOnItemClickListener { parent, _, position, _ ->
+                selectedCategory = parent.getItemAtPosition(position).toString()
             }
         }
     }
+
 
     private fun setupButtons() {
         binding.btnEditDate.setOnClickListener { openDatePicker() }
@@ -96,7 +94,7 @@ class EditFragment : Fragment() {
     private fun loadExpenseData() {
         if (currentExpenseId == -1) {
             Toast.makeText(requireContext(), "Invalid expense ID", Toast.LENGTH_SHORT).show()
-            navigationListener?.navigateToHome()
+           dismiss()
             return
         }
 
@@ -139,17 +137,20 @@ class EditFragment : Fragment() {
         val title = binding.etEditTitle.text.toString()
         val amount = binding.etEditAmount.text.toString().toFloatOrNull()
         val notes = binding.etEditNotes.text.toString()
-        val categoryName = binding.spinnerEditCategory.selectedItem?.toString() ?: ""
         val dateString = binding.btnEditDate.text.toString()
 
-        if (title.isEmpty() || amount == null || categoryName.isEmpty() || dateString.isEmpty()) {
+        if(selectedCategory==null){
+            binding.spinnerEditCategory.error = "Please select a category"
+            return
+        }
+        if (title.isEmpty() || amount == null || dateString.isEmpty()) {
             Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             return
         }
 
         val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
         val date = sdf.parse(dateString)
-        val category = vm.allCategory.value?.find { it.name == categoryName }
+        val category = vm.allCategory.value?.find { it.name == selectedCategory }
 
         if (date != null && category != null && currentExpense != null) {
             val updatedExpense = Expense(
@@ -164,7 +165,7 @@ class EditFragment : Fragment() {
             vm.updateExpense(updatedExpense)
             Toast.makeText(requireContext(), "Expense updated successfully", Toast.LENGTH_SHORT)
                 .show()
-            navigationListener?.navigateToHome()
+           dismiss()
         }
     }
 
@@ -174,10 +175,6 @@ class EditFragment : Fragment() {
         _binding = null
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        navigationListener = null
-    }
 
     companion object {
         private const val ARG_EXPENSE_ID = "expense_id"

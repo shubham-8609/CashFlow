@@ -30,4 +30,7 @@
 
         <!-- Outline -->
         <color name="md_theme_dark_outline">#A68A95</color>
+        <color name="safe">#4CAF50</color>      <!-- Green -->
+        <color name="warning">#FF9800</color>   <!-- Orange -->
+        <color name="over">#F44336</color>      <!-- Red -->
 </resources>

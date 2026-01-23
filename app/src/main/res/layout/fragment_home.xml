@@ -38,74 +38,97 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="14dp">
 
-                        <!-- TITLE -->
+                        <!-- HERO ROW -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <!-- LEFT : AMOUNT -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Spent this month"
+                                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                                    android:textColor="?attr/colorOnPrimaryContainer"
+                                    android:alpha="0.85" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tv_total_spent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="₹12,540"
+                                    android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                                    android:textStyle="bold"
+                                    android:textColor="?attr/colorOnPrimaryContainer" />
+
+                                <!-- STATUS BADGE -->
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tv_budget_status"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:text="SAFE"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="4dp"
+                                    android:background="@drawable/bg_budget_status"
+                                    android:textAppearance="?attr/textAppearanceLabelSmall"
+                                    android:textColor="?attr/colorOnPrimary" />
+                            </LinearLayout>
+
+                            <!-- RIGHT : CIRCULAR PROGRESS -->
+                            <FrameLayout
+                                android:layout_width="76dp"
+                                android:layout_height="76dp">
+
+                                <com.google.android.material.progressindicator.CircularProgressIndicator
+                                    android:id="@+id/circular_budget"
+                                    android:layout_width="72dp"
+                                    android:layout_height="72dp"
+                                    android:progress="68"
+                                    app:indicatorSize="72dp"
+                                    android:max="100"
+                                    app:trackThickness="8dp"
+                                    app:indicatorColor="?attr/colorOnPrimaryContainer"
+                                    app:trackColor="?attr/colorSurfaceVariant" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text='@{String.format("%.0f%%", viewModel.spentPercentage)}'
+                                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                                    android:textStyle="bold"
+                                    android:textColor="?attr/colorOnPrimaryContainer" />
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <!-- INSIGHT LINE -->
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="This Month’s Summary"
-                            android:textAllCaps="true"
-                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:layout_marginTop="10dp"
+                            android:text='@{"Top spend: " + viewModel.topCategory}'
+                            android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnPrimaryContainer"
-                            android:alpha="0.9"
-                            android:layout_gravity="center_horizontal" />
+                            android:alpha="0.85" />
 
-                        <!-- TOTAL SPENT -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:orientation="horizontal"
-                            android:layout_gravity="center_horizontal">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Total Spent: "
-                                android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                                android:textColor="?attr/colorOnPrimaryContainer" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tv_total_spent"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="₹ 12,540"
-                                android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                                android:textStyle="bold"
-                                android:textColor="?attr/colorOnPrimaryContainer" />
-                        </LinearLayout>
-
-                        <!-- PROGRESS -->
+                        <!-- STATS ROW -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:gravity="center_vertical">
-
-                            <com.google.android.material.progressindicator.LinearProgressIndicator
-                                android:id="@+id/progress_spent"
-                                android:layout_width="0dp"
-                                android:layout_height="8dp"
-                                android:layout_weight="1"
-                                app:trackColor="?attr/colorSurfaceVariant"
-                                app:indicatorColor="?attr/colorOnPrimaryContainer" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:text='@{String.format("%.0f%%", viewModel.spentPercentage)}'
-                                android:textAppearance="?attr/textAppearanceLabelMedium"
-                                android:textColor="?attr/colorOnPrimaryContainer" />
-                        </LinearLayout>
-
-                        <!-- STATS -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="14dp"
                             android:orientation="horizontal"
                             android:weightSum="3">
 
@@ -120,17 +143,18 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Transactions"
-                                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                                    android:text="Txns"
+                                    android:textAppearance="?attr/textAppearanceLabelSmall"
                                     android:textColor="?attr/colorOnPrimaryContainer"
-                                    android:alpha="0.9" />
+                                    android:alpha="0.8" />
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/tv_transaction_count"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="24"
-                                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textStyle="bold"
                                     android:textColor="?attr/colorOnPrimaryContainer" />
                             </LinearLayout>
 
@@ -145,16 +169,16 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Highest Exp"
-                                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                                    android:text="Highest"
+                                    android:textAppearance="?attr/textAppearanceLabelSmall"
                                     android:textColor="?attr/colorOnPrimaryContainer"
-                                    android:alpha="0.9" />
+                                    android:alpha="0.8" />
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{String.format("₹%.0f", viewModel.highestExpense)}'
-                                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
                                     android:textStyle="bold"
                                     android:textColor="?attr/colorOnPrimaryContainer" />
                             </LinearLayout>
@@ -170,8 +194,8 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Avg Expense"
-                                    android:textAppearance="?attr/textAppearanceBodySmall"
+                                    android:text="Average"
+                                    android:textAppearance="?attr/textAppearanceLabelSmall"
                                     android:textColor="?attr/colorOnPrimaryContainer"
                                     android:alpha="0.8" />
 
@@ -183,7 +207,9 @@
                                     android:textStyle="bold"
                                     android:textColor="?attr/colorOnPrimaryContainer" />
                             </LinearLayout>
+
                         </LinearLayout>
+
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 

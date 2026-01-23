@@ -31,4 +31,11 @@
     <!-- Outline -->
     <color name="md_theme_light_outline">#8A7480</color>
 
+        <!-- Budget Status Colors -->
+        <color name="safe">#4CAF50</color>      <!-- Green -->
+        <color name="warning">#FF9800</color>   <!-- Orange -->
+        <color name="over">#F44336</color>      <!-- Red -->
+
+
+
 </resources>

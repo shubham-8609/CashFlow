@@ -46,8 +46,27 @@ class HomeFragment : Fragment() {
             binding.tvTransactionCount.text = expenses.size.toString()
         }
         mainViewModel.spentPercentage.observe(viewLifecycleOwner) { percent ->
-            binding.progressSpent.progress =  percent.toInt()
+
+            val safePercent = percent.coerceIn(0f, 100f).toInt()
+
+            // Circular progress
+            binding.circularBudget.setProgress(safePercent, true)
+
+            // Optional: sync text manually if not using data binding
+            binding.tvBudgetStatus.text = when {
+                safePercent < 70 -> "SAFE"
+                safePercent < 90 -> "WARNING"
+                else -> "OVER"
+            }
+            val statusColor  = when {
+                safePercent < 70 -> requireContext().getColor(R.color.safe)
+                safePercent < 90 -> requireContext().getColor(R.color.warning)
+                else -> requireContext().getColor(R.color.over)
+            }
+            binding.circularBudget.setIndicatorColor(statusColor)
+            binding.tvTotalSpent.setTextColor(statusColor)
         }
+
 
         addBtn = binding.fabAddExpense
         addBtn.setOnClickListener { AddFragment().show(parentFragmentManager , "AddExpense") }

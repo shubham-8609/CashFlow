@@ -70,7 +70,7 @@ dependencies {
 
     // ✅ WorkManager - Background work scheduling and execution (KTX)
     implementation("androidx.work:work-runtime-ktx:2.11.0")
-
+    implementation("com.airbnb.android:lottie:6.7.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

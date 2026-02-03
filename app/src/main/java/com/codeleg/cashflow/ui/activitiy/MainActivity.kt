@@ -24,6 +24,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.codeleg.cashflow.ui.fragment.SplashFragment
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
-                replace(binding.mainContainer.id, HomeFragment())
+                replace(binding.mainContainer.id, SplashFragment())
             }
         }
         askNotificationPermissionIfNeeded()
